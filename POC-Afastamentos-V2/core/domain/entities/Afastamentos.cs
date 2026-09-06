@@ -2,15 +2,15 @@
 {
     public class Afastamentos
     {
-        public Afastamentos(int id, string name, bool ativo)
+        public Afastamentos(int id, string nome, bool ativo)
         {
             Id = id;
-            Name = name;
+            Nome = nome;
             Ativo = ativo;
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Nome { get; set; }
         public bool Ativo { get; set; }
 
 

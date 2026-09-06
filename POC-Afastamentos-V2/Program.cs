@@ -1,3 +1,5 @@
+using POC_Afastamentos_V2.adapters.driven.ConnectionDB;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.RegistryDataBase(builder.Configuration);
 
 var app = builder.Build();
 

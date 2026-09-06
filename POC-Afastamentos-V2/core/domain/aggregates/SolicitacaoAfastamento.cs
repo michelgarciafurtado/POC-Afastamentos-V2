@@ -14,7 +14,7 @@ namespace POC_Afastamentos_V2.core.domain.aggregates
         public DateTime DataInicio { get; set; }
         public int NumeroDias { get; set; } = 0;
         public string Motivo { get; set; }
-        public int AfastamentoId { get; set; }
+        public int TipoAfastamentoId { get; set; }
         public Afastamentos TipoAfastamento { get; set; }
         public DetalhesAfastamento DetalhesAfastamento { get; set; }
     }
