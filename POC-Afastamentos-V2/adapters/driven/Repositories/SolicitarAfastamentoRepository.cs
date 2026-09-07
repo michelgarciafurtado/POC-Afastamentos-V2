@@ -5,9 +5,6 @@ using POC_Afastamentos_V2.core.ports.outbound;
 
 namespace POC_Afastamentos_V2.adapters.driven.Repositories;
 
-public class SolicitarAfastamentoRepository : GenericRepository<SolicitacaoAfastamento>, ISolicitarAfastamentoRepository
+public class SolicitarAfastamentoRepository(ApplicationDbContext context, DbSet<SolicitacaoAfastamento> dbSet) : GenericRepository<SolicitacaoAfastamento>(context), ISolicitarAfastamentoRepository
 {
-    public SolicitarAfastamentoRepository(ApplicationDbContext context, DbSet<SolicitacaoAfastamento> dbSet) : base(context)
-    {
-    }
 }
