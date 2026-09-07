@@ -5,14 +5,14 @@ using System.Reflection.Emit;
 
 namespace POC_Afastamentos_V2.adapters.driven.ConnectionDB;
 
-public class ApplicaDbContext:DbContext
+public class ApplicationDbContext:DbContext
 {
-    public ApplicaDbContext(DbContextOptions<ApplicaDbContext> options) : base(options) {  }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {  }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicaDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
     DbSet<Policial> Policiais { get; set; }

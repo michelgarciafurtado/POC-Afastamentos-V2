@@ -1,4 +1,4 @@
-﻿namespace POC_Afastamentos_V2.core.Dtos
+﻿namespace POC_Afastamentos_V2.core.Dtos.SolicitarAfastamentos
 {
     public record SolicitarLicPaterGestDto:SolicitarAfastamentoDto
     {

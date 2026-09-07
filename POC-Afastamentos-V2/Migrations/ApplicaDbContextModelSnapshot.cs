@@ -10,7 +10,7 @@ using POC_Afastamentos_V2.adapters.driven.ConnectionDB;
 
 namespace POC_Afastamentos_V2.Migrations
 {
-    [DbContext(typeof(ApplicaDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicaDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

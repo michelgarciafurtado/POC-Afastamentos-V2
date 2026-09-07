@@ -2,6 +2,12 @@
 {
     public class Afastamentos
     {
+        public Afastamentos( int id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+            Ativo = true;
+        }
         public Afastamentos(int id, string nome, bool ativo)
         {
             Id = id;

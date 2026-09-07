@@ -11,7 +11,7 @@ using POC_Afastamentos_V2.adapters.driven.ConnectionDB;
 
 namespace POC_Afastamentos_V2.Migrations
 {
-    [DbContext(typeof(ApplicaDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260906004802_InitialCreate")]
     partial class InitialCreate
     {
