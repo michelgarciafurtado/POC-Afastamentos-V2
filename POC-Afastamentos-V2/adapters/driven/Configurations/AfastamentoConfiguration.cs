@@ -11,6 +11,7 @@ public class AfastamentoConfiguration:IEntityTypeConfiguration<Afastamentos>
         builder.HasKey(a => a.Id);
         builder.Property(a => a.Id)
             .HasColumnName("Id")
+            .ValueGeneratedOnAdd()
             .IsRequired();
         builder.Property(a => a.Nome)
             .HasColumnName("Nome")

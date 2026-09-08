@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POC_Afastamentos_V2.adapters.driven.ConnectionDB;
 
@@ -11,9 +12,11 @@ using POC_Afastamentos_V2.adapters.driven.ConnectionDB;
 namespace POC_Afastamentos_V2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260908134136_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

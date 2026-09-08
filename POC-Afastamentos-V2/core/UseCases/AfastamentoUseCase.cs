@@ -16,14 +16,36 @@ namespace POC_Afastamentos_V2.core.UseCases
             _afastamentoRepository = afastamentoRepository;
         }
 
+        public async Task<bool> AlterarStatus(AlterarStatusAfastamentoDto dto)
+        {
+            var afastamento = _afastamentoRepository.BuscarAsync(a => a.Id == dto.id).Result.FirstOrDefault();
+            if (afastamento == null)
+                throw new InvalidOperationException("Afastamento não encontrado");
+
+            int sucesso = await _afastamentoRepository.CommitAsync();
+            return sucesso > 0;
+        }
+
+        public async Task<AfastamentoDto> AtualizarAsync(AlterarAfastamentoDto dto)
+        {
+           var afastamento = _afastamentoRepository.BuscarAsync(a => a.Id == dto.id).Result.FirstOrDefault();
+            if (afastamento == null)
+                throw new InvalidOperationException("Afastamento não encontrado");
+            afastamento.AlterarNome(dto.nome);
+            _afastamentoRepository.Atualizar(afastamento);
+            var sucesso = await _afastamentoRepository.CommitAsync();
+            if (sucesso > 0)
+                return new AfastamentoDto(afastamento.Id, afastamento.Nome, afastamento.Ativo);
+            else
+                throw new InvalidOperationException("Não foi possível atualizar o afastamento");
+        }
+
         public async Task<int> CriarAsync(NovoAfastamentoDto dto)
         {
-            Afastamentos novoAfastamento = new Afastamentos(dto.id,dto.Nome);
+            Afastamentos novoAfastamento = new Afastamentos(dto.Nome);
             await _afastamentoRepository.AdicionarAsync(novoAfastamento);
-            int sucesso =  await _afastamentoRepository.CommitAsync();
-            if (sucesso == 0)
-                return new Exception("Não foi possível criar o afastamento.").HResult;
-            return sucesso;
+           return  await _afastamentoRepository.CommitAsync();
+           
         }
 
         public async Task<IEnumerable<AfastamentoDto>> ListarAsync(Expression<Func<Afastamentos, bool>> predicate)
@@ -32,9 +54,27 @@ namespace POC_Afastamentos_V2.core.UseCases
             return afastamentos.Select(a => new AfastamentoDto(a.Id, a.Nome, a.Ativo));
         }
 
-        public Task<AfastamentoDto> ObterAsync(Expression<Func<Afastamentos, bool>> predicate)
+        public async Task<AfastamentoDto> ObterAsync(Expression<Func<Afastamentos, bool>> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<Afastamentos> listAfast = await _afastamentoRepository.BuscarAsync(predicate);
+            var afastamento = listAfast.FirstOrDefault();
+            if (afastamento == null)
+                throw new InvalidOperationException("Afastamento não encontrado");
+            return new AfastamentoDto(afastamento.Id, afastamento.Nome, afastamento.Ativo);
+        }
+        public async Task<IEnumerable<AfastamentoDto>> ObterTodosAsync()
+        {
+            IEnumerable<Afastamentos> listAfast = await _afastamentoRepository.BuscarAsync(null);
+          
+            if (listAfast == null)
+                throw new InvalidOperationException("Falha em recuperar a lista de afastamentos");
+            IEnumerable<AfastamentoDto> afastamentosDtos = listAfast.Select(a => new AfastamentoDto
+            (
+                a.Id,
+                a.Nome,
+                a.Ativo
+            ));
+            return afastamentosDtos;
         }
     }
 }

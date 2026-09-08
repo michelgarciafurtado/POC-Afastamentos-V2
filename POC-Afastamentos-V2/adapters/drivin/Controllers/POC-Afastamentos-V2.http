@@ -1,11 +1,29 @@
 @POC_Afastamentos_V2_HostAddress = http://localhost:5134
 
-POST {{POC_Afastamentos_V2_HostAddress}}/api/Afastmentos
+POST {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos
 Accept: application/json
 Content-Type: application/json
 
 {
-  "id": 1,
-  "Nome": "Dispensa do Serviço"
+  "Nome": "Trânsito"
 }
+###
+
+PUT {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Id": 4,
+  "Nome": "Licença-Paternidade/Gestante"
+}
+###
+GET {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos/3
+Accept: application/json
+
+###
+
+GET {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos
+Accept: application/json
+
 ###

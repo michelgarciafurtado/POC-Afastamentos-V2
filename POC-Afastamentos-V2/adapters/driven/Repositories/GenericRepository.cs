@@ -10,7 +10,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
     protected readonly ApplicationDbContext _context;
     protected readonly DbSet<TEntity> DbSet;
 
-    protected GenericRepository(ApplicationDbContext context)
+    public GenericRepository(ApplicationDbContext context)
     {
         _context = context;
         DbSet = context.Set<TEntity>();
@@ -28,6 +28,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public virtual async Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate)
     {
+        predicate ??= x => true;
         return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
     }
 

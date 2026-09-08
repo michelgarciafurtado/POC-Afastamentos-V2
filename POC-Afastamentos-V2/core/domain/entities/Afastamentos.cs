@@ -2,6 +2,11 @@
 {
     public class Afastamentos
     {
+        public Afastamentos(string nome)
+        {
+            Nome = nome;
+            Ativo = true;
+        }
         public Afastamentos( int id, string nome)
         {
             Id = id;
@@ -19,6 +24,11 @@
         public string Nome { get; set; }
         public bool Ativo { get; set; }
 
-
+        internal void AlterarNome(string nome)
+        {
+            if (nome == null) 
+                throw new ArgumentNullException("Nome não pode ser nulo");
+            Nome = nome;
+        }
     }
 }

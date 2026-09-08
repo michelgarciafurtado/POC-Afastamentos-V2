@@ -8,7 +8,7 @@ namespace POC_Afastamentos_V2.adapters.driven.Repositories
 {
     public class PolicialRepository : GenericRepository<Policial>, IPolicialRepository
     {
-        public PolicialRepository(ApplicationDbContext context, DbSet<Policial> dbSet) : base(context)
+        public PolicialRepository(ApplicationDbContext context) : base(context)
         {
         }
 
