@@ -52,4 +52,9 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
     {
         DbSet.Remove(entity);
     }
+
+    public virtual IQueryable<TEntity> Queryable()
+    {
+        return DbSet.AsNoTracking();
+    }
 }

@@ -23,6 +23,14 @@
             NomeOpm = nomeOpm;
         }
 
+        public void AtualizarOpm(string opmCod, string nomeOpm, int opmNivel, string localOpm)
+        {
+            OpmCod = opmCod;
+            NomeOpm = nomeOpm;
+            OpmNivel = opmNivel;
+            LocalOpm = localOpm;
+        }
+
         public void AlterarNome(string novoNome)
         {
             NomeOpm = novoNome;

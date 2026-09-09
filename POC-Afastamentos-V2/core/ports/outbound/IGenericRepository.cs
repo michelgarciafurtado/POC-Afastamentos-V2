@@ -11,5 +11,6 @@ namespace POC_Afastamentos_V2.core.ports.outbound
         void Atualizar(TEntity entity);
         void Remover(TEntity entity);
         Task<int> CommitAsync();
+        IQueryable<TEntity> Queryable();
     }
 }
