@@ -15,7 +15,6 @@ namespace POC_Afastamentos_V2.adapters.driven.ConnectionDB
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IPolicialRepository, PolicialRepository>();
             services.AddScoped<ISolicitarAfastamentoRepository, SolicitarAfastamentoRepository>();
-            
 
             return services;
         }

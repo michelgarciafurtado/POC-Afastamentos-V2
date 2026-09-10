@@ -2,11 +2,11 @@
 {
     public class PostoGraduacao
     {
-        public int PosCod { get; set; }
-        public string Sigla { get; set; }
-        public string Descricao { get; set; }
-        public int Nivel { get; set; }
-        public bool Ativo { get; set; }
+        public int PosCod { get; private set; }
+        public string Sigla { get; private set; }
+        public string Descricao { get; private set; }
+        public int Nivel { get; private set; }
+        public bool Ativo { get; private set; }
 
         public PostoGraduacao(int posCod, string sigla, string descricao, int nivel)
         {
@@ -20,6 +20,10 @@
         public void InativarPosto()
         {
             Ativo = false;
+        }
+        public void AtivarPosto()
+        {
+            Ativo = true;
         }
     }
 }

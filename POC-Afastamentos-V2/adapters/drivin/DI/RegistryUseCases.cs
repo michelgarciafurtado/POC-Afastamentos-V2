@@ -9,6 +9,7 @@ namespace POC_Afastamentos_V2.adapters.drivin.DI
         {
             services.AddScoped<IAfastamentoUseCase, AfastamentoUseCase>();
             services.AddScoped<ISolicitarAfastamentoUseCase, SolicitarAfastamentoUseCase>();
+            services.AddScoped<IOpmUseCase, OpmUseCase>();
 
             return services;
         }

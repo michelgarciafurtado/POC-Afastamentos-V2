@@ -1,0 +1,32 @@
+@POC_Opms_V2_HostAddress = http://localhost:5134
+
+POST {{POC_Opms_V2_HostAddress}}/api/Opms
+Accept: application/json
+Content-Type: application/json
+
+{
+  "OpmCod": "204040000",
+  "NomeOpm": "DEPARTAMENTO DE APOIO TECNICO E ADMINISTRATIVO",
+  "OpmNivel": 2,
+  "LocalOpm": "Av Cruzeiro do Sul, 260 São Paulo"
+}
+###
+
+PUT {{POC_Opms_V2_HostAddress}}/api/Opms
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Id": 4,
+  "Nome": "Licença-Paternidade/Gestante"
+}
+###
+GET {{POC_Opms_V2_HostAddress}}/api/Opms/204000000
+Accept: application/json
+
+###
+
+GET {{POC_Opms_V2_HostAddress}}/api/Opms
+Accept: application/json
+
+###
