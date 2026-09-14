@@ -8,7 +8,7 @@ namespace POC_Afastamentos_V2.adapters.driven.ConnectionDB
     {
         public static IServiceCollection RegistryDataBase(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("WorkConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 

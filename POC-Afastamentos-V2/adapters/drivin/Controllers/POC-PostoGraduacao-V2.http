@@ -1,0 +1,34 @@
+@POC_Opms_V2_HostAddress = http://localhost:5134
+
+POST {{POC_Opms_V2_HostAddress}}/api/PostoGraduacao
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Sigla": "2º Ten PM",
+  "Descricao": "Segundo-Tenente Polícial Militar",
+  "Nivel": 6
+}
+###
+
+PUT {{POC_Opms_V2_HostAddress}}/api/PostoGraduacao
+Accept: application/json
+Content-Type: application/json
+
+{
+  "PosCod": 1,
+  "Sigla": "SGT",
+  "Descricao": "Sargento",
+  "Nivel": 1
+}
+}
+###
+GET {{POC_Opms_V2_HostAddress}}/api/PostoGraduacao/1
+Accept: application/json
+
+###
+
+GET {{POC_Opms_V2_HostAddress}}/api/PostoGraduacao
+Accept: application/json
+
+###
