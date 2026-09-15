@@ -1,3 +1,7 @@
 <Solution>
+  <Folder Name="/docs/">
+    <File Path="ModelosDtoSolicitacao.md" />
+  </Folder>
   <Project Path="POC-Afastamentos-V2/POC-Afastamentos-V2.csproj" />
+  <Project Path="SolicitacaoAfastamentosTestes/SolicitacaoAfastamentosTestes.csproj" Id="edadc2c2-01f1-41f7-a947-b2cf2c664761" />
 </Solution>
