@@ -8,12 +8,16 @@ namespace POC_Afastamentos_V2.core.UseCases.validations
     {
         public bool PodeValidar(DetalhesAfastamento detalhes)
         {
-            throw new NotImplementedException();
+            return detalhes is DetalhesDispensaServico;
         }
 
         public ResultadoValidacao Validar(DetalhesAfastamento detalhes, IEnumerable<RegraAfastamento> regras)
         {
-            throw new NotImplementedException();
+            var dispensa = (DetalhesDispensaServico)detalhes;
+
+            // regras específicas de DS
+
+            return ResultadoValidacao.Sucesso();
         }
     }
 }
