@@ -10,7 +10,7 @@ namespace POC_Afastamentos_V2.core.UseCases
     {
         private readonly IRegrasAfastamentoRepository _regrasRepository;
 
-        //Dictionary com valor composto entende que o ultimo argumento e o tipo de retorno
+        //Dictionary com valor composto entende que o ultimo argumento na chave de valor é o tipo de retorno
         private static readonly Dictionary<Type, Func<DetalhesAfastamento, IEnumerable<RegraAfastamento>, ResultadoValidacao>> Validadores = new()
         {
             { typeof(DetalhesLuto), ( det, reg) => (ResultadoValidacao)ValidarRegrasLuto((DetalhesLuto)det, reg) },
