@@ -16,9 +16,15 @@ namespace POC_Afastamentos_V2.adapters.driven.Configurations
 
             builder.Property(s => s.Id).IsRequired();
 
-            builder.HasOne(s => s.Policial)
+            builder.HasOne(s => s.Interessado)
                 .WithMany()
-                .HasForeignKey(s => s.PolicialRe)
+                .HasForeignKey(s => s.InteressadoRe)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            builder.HasOne(s => s.Solicitante)
+                .WithMany()
+                .HasForeignKey(s => s.SolicitanteRe)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 

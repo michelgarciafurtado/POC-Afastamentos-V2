@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="core\UseCases\validations\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

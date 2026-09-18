@@ -20,14 +20,19 @@ public class SolicitacaoAfastamento
     public Afastamentos TipoAfastamento { get; set; }
     public DetalhesAfastamento DetalhesAfastamento { get; set; }
 
-    public bool ValidarDiasAfastamento()
+    private static readonly Dictionary<string, Type> MapeamentoPorCodigo = new(StringComparer.OrdinalIgnoreCase)
     {
-        if (TipoAfastamentoId == null)
-            throw new ArgumentException("Tipo de afastamento não pode ser nulo.");
-        if (NumeroDias < DetalhesAfastamento.DiasMinimo || NumeroDias > DetalhesAfastamento.DiasMaximo)
-            return false;
-        return true;
-    }
+        { "DispensaRecompensa", typeof(DetalhesDispensaRecompensa) },
+        { "DispensaServico", typeof(DetalhesDispensaServico) },
+        { "LicencaPremio", typeof(DetalhesLicencaPremio) },
+        { "LicPaterGest", typeof(DetalhesLicPaterGest) },
+        { "Luto", typeof(DetalhesLuto) },
+        { "Nupcias", typeof(DetalhesNupcias) },
+        { "FeriasSobrestadas", typeof(DetalhesFeriasSobrestadas) },
+        { "LicencaPremioSobrestada", typeof(DetalhesLicencaPremioSobrestada) },
+        { "Transito", typeof(DetalhesTransito) }
+    };
+
 }
     public enum TipoDoc
     {
