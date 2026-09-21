@@ -113,4 +113,22 @@ public class TestsSolicitarAfastamento
         var regrasLuto = Regras.Where(r => r.TipoAfastamentoId == SolLuto.TipoAfastamentoId);
         Assert.That(regrasLuto.Count, Is.EqualTo(2), "Deve ter carregado duas regras de luto");
     }
+
+    [Test]
+    public void TestValidarRegrasLuto_DevePassar()
+    {
+        SolicitacaoAfastamento SolLuto = new SolicitacaoAfastamento();
+        SolLuto.Id = Guid.NewGuid();
+        SolLuto.SolicitanteRe = solicitante.ReDg;
+        SolLuto.InteressadoRe = interessado.ReDg;
+        SolLuto.OpmCod = DP.OpmCod;
+        SolLuto.DataPedido = DateTime.Now;
+        SolLuto.DataInicio = DateTime.Now;
+        SolLuto.TipoAfastamentoId = Luto.Id;
+        SolLuto.TipoAfastamento = Luto;
+        SolLuto.Motivo = "Falecimento de familiar";
+        SolLuto.DetalhesAfastamento = new DetalhesLuto("Antonio da Silva", GrauParentesco.Pai, "urlCertObito");
+        
+        
+    }
 }

@@ -1,5 +1,7 @@
 ﻿using POC_Afastamentos_V2.core.ports.inbound;
 using POC_Afastamentos_V2.core.UseCases;
+using POC_Afastamentos_V2.core.UseCases.validations;
+using POC_Afastamentos_V2.core.UseCases.validations.strategies;
 
 namespace POC_Afastamentos_V2.adapters.drivin.DI
 {
@@ -11,6 +13,9 @@ namespace POC_Afastamentos_V2.adapters.drivin.DI
             services.AddScoped<ISolicitarAfastamentoUseCase, SolicitarAfastamentoUseCase>();
             services.AddScoped<IOpmUseCase, OpmUseCase>();
             services.AddScoped<IPostoGraduacaoUseCase, PostoGraduacaoUseCase>();
+            services.AddScoped<IValidadorAfastamentoStrategy, ValidadorDispensaServicoStrategy>();
+            services.AddScoped<IValidadorAfastamentoStrategy, ValidadorLutoStrategy>();
+
 
             return services;
         }

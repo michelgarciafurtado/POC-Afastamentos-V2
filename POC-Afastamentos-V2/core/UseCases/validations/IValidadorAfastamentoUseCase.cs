@@ -3,11 +3,10 @@ using POC_Afastamentos_V2.core.domain.entities;
 using POC_Afastamentos_V2.core.domain.valueobjects;
 using POC_Afastamentos_V2.core.UseCases;
 
-namespace POC_Afastamentos_V2.core.ports.inbound
-{
-    public interface IValidadorAfastamento
-    {
+namespace POC_Afastamentos_V2.core.UseCases.validations;
 
-        Task<ResultadoValidacao> ValidarAsync(SolicitacaoAfastamento solicitacaoAfastamento);
-    }
+public interface IValidadorAfastamentoUseCase
+{
+
+    Task<ResultadoValidacao> ValidarAsync(SolicitacaoAfastamento solicitacaoAfastamento);
 }
