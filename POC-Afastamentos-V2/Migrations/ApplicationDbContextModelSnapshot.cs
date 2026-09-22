@@ -28,6 +28,10 @@ namespace POC_Afastamentos_V2.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("nvarchar(6)");
 
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Dg")
                         .HasMaxLength(2)
                         .HasColumnType("int");
@@ -70,6 +74,10 @@ namespace POC_Afastamentos_V2.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("DetalhesAfastamento");
 
+                    b.Property<string>("InteressadoRe")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(6)");
+
                     b.Property<string>("Motivo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -81,7 +89,7 @@ namespace POC_Afastamentos_V2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("PolicialRe")
+                    b.Property<string>("SolicitanteRe")
                         .IsRequired()
                         .HasColumnType("nvarchar(6)");
 
@@ -90,9 +98,11 @@ namespace POC_Afastamentos_V2.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InteressadoRe");
+
                     b.HasIndex("OpmCod");
 
-                    b.HasIndex("PolicialRe");
+                    b.HasIndex("SolicitanteRe");
 
                     b.HasIndex("TipoAfastamentoId");
 
@@ -185,6 +195,48 @@ namespace POC_Afastamentos_V2.Migrations
                     b.ToTable("Posto_Graducao", (string)null);
                 });
 
+            modelBuilder.Entity("POC_Afastamentos_V2.core.domain.entities.RegraAfastamento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DiasMaximo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasMinimo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Frequencia")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("TipoAfastamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoRegra")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("qtd")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoAfastamentoId");
+
+                    b.ToTable("RegrasAfastamentos", (string)null);
+                });
+
             modelBuilder.Entity("POC_Afastamentos_V2.core.domain.aggregates.Policial", b =>
                 {
                     b.HasOne("POC_Afastamentos_V2.core.domain.entities.Opm", "Opm")
@@ -206,15 +258,21 @@ namespace POC_Afastamentos_V2.Migrations
 
             modelBuilder.Entity("POC_Afastamentos_V2.core.domain.aggregates.SolicitacaoAfastamento", b =>
                 {
+                    b.HasOne("POC_Afastamentos_V2.core.domain.aggregates.Policial", "Interessado")
+                        .WithMany()
+                        .HasForeignKey("InteressadoRe")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("POC_Afastamentos_V2.core.domain.entities.Opm", "Opm")
                         .WithMany()
                         .HasForeignKey("OpmCod")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("POC_Afastamentos_V2.core.domain.aggregates.Policial", "Policial")
+                    b.HasOne("POC_Afastamentos_V2.core.domain.aggregates.Policial", "Solicitante")
                         .WithMany()
-                        .HasForeignKey("PolicialRe")
+                        .HasForeignKey("SolicitanteRe")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -224,9 +282,22 @@ namespace POC_Afastamentos_V2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Interessado");
+
                     b.Navigation("Opm");
 
-                    b.Navigation("Policial");
+                    b.Navigation("Solicitante");
+
+                    b.Navigation("TipoAfastamento");
+                });
+
+            modelBuilder.Entity("POC_Afastamentos_V2.core.domain.entities.RegraAfastamento", b =>
+                {
+                    b.HasOne("POC_Afastamentos_V2.core.domain.entities.Afastamentos", "TipoAfastamento")
+                        .WithMany()
+                        .HasForeignKey("TipoAfastamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TipoAfastamento");
                 });
