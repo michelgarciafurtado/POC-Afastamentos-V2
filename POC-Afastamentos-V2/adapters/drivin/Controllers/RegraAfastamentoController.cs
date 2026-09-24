@@ -21,19 +21,45 @@ public class RegraAfastamentoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CriarRegra([FromBody] NovaRegraDto dto)
     {
-        return Ok();
+        var resultado = await _regraUseCase.CriarAsync(dto);
+        return CreatedAtAction(nameof(CriarRegra), new { id = resultado }, dto);
     }
 
     [HttpPut]
     public async Task<IActionResult> AtualizarRegra([FromBody] AlterarRegraDto dto)
     {
-        return Ok();
+        var atualizado = await _regraUseCase.AtualizarAsync(dto);
+        if (atualizado == null)
+            return NotFound();
+
+        return Ok(atualizado);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> ObterAsync(int id)
     {
+        var regra = await _regraUseCase.ObterAsync(id);
+        if (regra == null)
+            return NotFound();
 
+        return Ok(regra);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> FiltrarRegras([FromBody] FiltroRegraDto filtro)
+    {
+        IEnumerable<RegraDto> resultados;
+
+        if (filtro == null)
+        {
+            resultados = await _regraUseCase.ObterTodosAsync();
+        }
+        else
+        {
+            resultados = await _regraUseCase.ListarAsync(filtro);
+        }
+
+        return Ok(new { Regras = resultados });
     }
 
 }

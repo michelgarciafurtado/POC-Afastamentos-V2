@@ -44,7 +44,7 @@ public class RegraAfastamentoUseCase : IRegraAfastamentoUseCase
         return sucesso >= 1;
     }
 
-    public async Task<OpmDto> AtualizarAsync(AlterarRegraDto dto)
+    public async Task<RegraDto> AtualizarAsync(AlterarRegraDto dto)
     {
         var list = await _regraAfastRepository.BuscarAsync(r => r.Id == dto.Id);
         if (list == null || !list.Any())
@@ -63,7 +63,17 @@ public class RegraAfastamentoUseCase : IRegraAfastamentoUseCase
         var sucesso = await _regraAfastRepository.CommitAsync();
         if (sucesso < 1) throw new InvalidOperationException("Erro ao atualizar regra");
 
-        return new OpmDto(regra.Id.ToString(), regra.TipoRegra, 0, regra.Frequencia ?? string.Empty, true);
+        return new RegraDto(
+            regra.Id,
+            regra.TipoAfastamentoId,
+            regra.TipoAfastamento?.Nome ?? string.Empty,
+            regra.TipoRegra,
+            regra.Valor,
+            regra.Frequencia,
+            regra.DiasMinimo,
+            regra.DiasMaximo,
+            regra.qtd
+        );
     }
 
     public async Task<int> CriarAsync(NovaRegraDto dto)
