@@ -86,7 +86,7 @@ public class RegraAfastamentoUseCase : IRegraAfastamentoUseCase
             Frequencia = dto.Frequencia,
             DiasMinimo = dto.DiasMinimo ?? 0,
             DiasMaximo = dto.DiasMaximo ?? 0,
-            qtd = dto.qtd ?? 0
+            qtd = dto.Qtd ?? 0
         };
 
         await _regraAfastRepository.AdicionarAsync(regra);

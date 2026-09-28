@@ -1,0 +1,35 @@
+@POC_Afastamentos_V2_HostAddress = http://localhost:5134
+
+POST {{POC_Afastamentos_V2_HostAddress}}/api/RegraAfastamento
+Accept: application/json
+Content-Type: application/json
+
+{
+  "TipoAfastamentoId": 7,
+  "TipoRegra": "Temporal",
+  "Valor": "FeriasNormais_TresParcelasPrimeiraMaior",
+  "Frequencia": "tres",
+  "DiasMinimo": 5,
+  "DiasMaximo": 14,
+  "Qtd": 3
+}
+###
+
+PUT {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Id": 4,
+  "Nome": "Licença-Paternidade/Gestante"
+}
+###
+GET {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos/3
+Accept: application/json
+
+###
+
+GET {{POC_Afastamentos_V2_HostAddress}}/api/Afastamentos
+Accept: application/json
+
+###

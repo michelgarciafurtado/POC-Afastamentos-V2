@@ -17,6 +17,6 @@ namespace POC_Afastamentos_V2.core.Dtos.Regras
         public required string Frequencia { get; set; }
         public int? DiasMinimo { get; set; } = null;
         public int? DiasMaximo { get; set; } = null;
-        public int? qtd { get; set; } = null;
+        public int? Qtd { get; set; } = null;
     }
 }

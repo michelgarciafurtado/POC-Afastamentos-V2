@@ -6,11 +6,65 @@ using NUnit.Framework;
 using POC_Afastamentos_V2.adapters.drivin.Controllers;
 using POC_Afastamentos_V2.core.Dtos.Regras;
 using POC_Afastamentos_V2.core.ports.inbound;
+using POC_Afastamentos_V2.core.domain.entities;
+using POC_Afastamentos_V2.core.domain.aggregates;
+using POC_Afastamentos_V2.core.domain.valueobjects;
 
 namespace SolicitacaoAfastamentosTestes
 {
     public class TestsRegrasAfastamento
     {
+        Afastamentos Luto  = new Afastamentos(1, "Luto");
+        Afastamentos DS = new Afastamentos(2, "Dispensa do Serviço");
+        RegraAfastamento regra1Luto, regra2Luto, regra1DS;
+        List<RegraAfastamento> Regras;
+
+        [SetUp]
+        public void Setup()
+        {
+            Regras = new List<RegraAfastamento>();
+            regra1Luto = new RegraAfastamento()
+            {
+                Id = 1,
+                TipoAfastamentoId = 1,
+                TipoAfastamento = Luto,
+                TipoRegra = "Parentesco",
+                Valor = GrauParentesco.Pai.ToString(),
+                DiasMinimo = 8,
+                DiasMaximo = 8,
+                qtd = 8
+            };
+            Regras.Add(regra1Luto);
+            regra2Luto = new RegraAfastamento()
+            {
+                Id = 2,
+                TipoAfastamentoId = 1,
+                TipoAfastamento = Luto,
+                TipoRegra = "Parentesco",
+                Valor = GrauParentesco.Avô.ToString(),
+                DiasMinimo = 2,
+                DiasMaximo = 2,
+                qtd = 2
+            };
+            Regras.Add(regra2Luto);
+            regra1DS = new RegraAfastamento()
+            {
+                Id = 3,
+                TipoAfastamentoId = DS.Id,
+                TipoAfastamento = DS,
+                TipoRegra = "Limite",
+                Frequencia = "Anual",
+                DiasMinimo = 1,
+                DiasMaximo = 6,
+                qtd = 6
+            };
+            Regras.Add(regra1DS);
+        }
+
+        private static RegraDto ToDto(RegraAfastamento r)
+        {
+            return new RegraDto(r.Id, r.TipoAfastamentoId, r.TipoAfastamento?.Nome ?? string.Empty, r.TipoRegra, r.Valor, r.Frequencia, r.DiasMinimo, r.DiasMaximo, r.qtd);
+        }
         class FakeRegraUseCase : IRegraAfastamentoUseCase
         {
             public bool ThrowOnCriar { get; set; }
@@ -87,7 +141,7 @@ namespace SolicitacaoAfastamentosTestes
         [Test]
         public async Task AtualizarRegra_Sucesso_DeveRetornarOkComDto()
         {
-            var regra = new RegraDto(10, 1, "desc", "T", "V", "F", 1, 2, 3);
+            var regra = ToDto(regra1Luto);
             var fake = new FakeRegraUseCase { AtualizarReturn = regra };
             var controller = new RegraAfastamentoController(fake);
             var dto = new AlterarRegraDto { Id = 10, TipoAfastamentoId = 1, TipoRegra = "T", Valor = "V", Frequencia = "F" };
@@ -114,7 +168,7 @@ namespace SolicitacaoAfastamentosTestes
         [Test]
         public async Task ObterAsync_Sucesso_DeveRetornarOkComDto()
         {
-            var regra = new RegraDto(7, 1, "desc", "T", "V", "F", 1, 2, 3);
+            var regra = ToDto(regra2Luto);
             var fake = new FakeRegraUseCase { ObterReturn = regra };
             var controller = new RegraAfastamentoController(fake);
 
@@ -139,7 +193,7 @@ namespace SolicitacaoAfastamentosTestes
         [Test]
         public async Task FiltrarRegras_Sucesso_ComFiltro_DeveRetornarRegras()
         {
-            var lista = new List<RegraDto> { new RegraDto(1,1,"d","T","V","F",1,2,3) };
+            var lista = new List<RegraDto> { ToDto(regra1Luto), ToDto(regra2Luto) };
             var fake = new FakeRegraUseCase { ListarReturn = lista };
             var controller = new RegraAfastamentoController(fake);
             var filtro = new FiltroRegraDto(1, "T");
@@ -157,7 +211,7 @@ namespace SolicitacaoAfastamentosTestes
         [Test]
         public async Task FiltrarRegras_Sucesso_FiltroNulo_DeveRetornarTodos()
         {
-            var lista = new List<RegraDto> { new RegraDto(2,1,"d","T","V","F",1,2,3) };
+            var lista = new List<RegraDto> { ToDto(regra1DS) };
             var fake = new FakeRegraUseCase { ListarReturn = lista };
             var controller = new RegraAfastamentoController(fake);
 

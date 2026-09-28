@@ -9,7 +9,7 @@ public enum GrauParentesco
     Irmão,
     Irmã,
     Conjuge,
-    Filhoª,
+    Filho,
     Sogra,
     Avó,
     Avô,
