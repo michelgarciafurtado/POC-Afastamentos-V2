@@ -6,4 +6,5 @@ namespace POC_Afastamentos_V2.core.ports.inbound;
 public interface ISolicitarAfastamentoUseCase
 {
     Task<NovoAfastamentoDto> CriarAfastamento(SolicitarAfastamentoDto dto);
+    Task<int> CriarAsync(SolicitarAfastamentoDto dto);
 }
